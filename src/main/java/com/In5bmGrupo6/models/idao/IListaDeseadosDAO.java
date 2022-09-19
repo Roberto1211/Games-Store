@@ -17,11 +17,11 @@ public interface IListaDeseadosDAO {
     public List<ListaDeseados> getAll(); 
     
     //Insertar registro
-    public boolean add(ListaDeseados listaDeseados);
+    public int add(ListaDeseados listaDeseados);
     
     //Actualizar un registro
-    public boolean update(ListaDeseados listaDeseados); 
+    public int update(ListaDeseados listaDeseados); 
     
     //Eliminar registro
-    public boolean delete(ListaDeseados listaDeseados);
+    public int delete(ListaDeseados listaDeseados);
 }

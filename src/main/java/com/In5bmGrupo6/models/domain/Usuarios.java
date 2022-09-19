@@ -11,20 +11,37 @@ public class Usuarios {
     private String correo_electronico;
     private int persona_id;
     private int rol_id;
+    private String persona;
+    private String rol;
 
     public Usuarios() {
     }
 
     public Usuarios(int user) {
         this.user = user;
-    }
-    
+    }    
 
     public Usuarios(String pass, String correo_electronico, int persona_id, int rol_id) {
+        this.user = user;
         this.pass = pass;
         this.correo_electronico = correo_electronico;
         this.persona_id = persona_id;
         this.rol_id = rol_id;
+    }
+    
+    public Usuarios(int user,String pass, String correo_electronico, String persona, String rol) {
+        this.user = user;
+        this.pass = pass;
+        this.correo_electronico = correo_electronico;
+        this.persona = persona;
+        this.rol = rol;
+    }
+    
+    public Usuarios(String pass, String correo_electronico, String persona, String rol) {
+        this.pass = pass;
+        this.correo_electronico = correo_electronico;
+        this.persona = persona;
+        this.rol = rol;
     }
 
     public Usuarios(int user, String pass, String correo_electronico, int persona_id, int rol_id) {
@@ -73,5 +90,21 @@ public class Usuarios {
 
     public void setRol_id(int rol_id) {
         this.rol_id = rol_id;
+    }
+
+    public String getPersona() {
+        return persona;
+    }
+
+    public void setPersona(String persona) {
+        this.persona = persona;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

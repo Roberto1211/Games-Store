@@ -14,10 +14,14 @@ import java.util.List;
  *
  * @author TulioJimènez
  */
-
 public class GenerosDaoImpl implements IGeneroDAO {
 
     private static final String SQL_SELECT = "Select id_genero, tipo_genero from generos";
+    private static final String SQL_SELECT_BY_ID = "select id_genero, tipo_genero from generos where id_genero = ?";
+    private static final String SQL_DELETE = "delete from generos where id_genero = ?";
+    private static final String SQL_INSERT = "insert into generos(tipo_genero) values(?)";
+    private static final String SQL_UPDATE = "update generos set tipo_genero=? where id_genero=?";
+
     private Connection con = null;
     private PreparedStatement pstmt = null;
     private ResultSet rs = null;
@@ -46,20 +50,86 @@ public class GenerosDaoImpl implements IGeneroDAO {
         }
         return listaGeneros;
     }
-
-    @Override
-    public boolean add(Generos genero) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    
+    public Generos get(Generos genero) {
+        try {
+            con = Conexion.getConnection();
+            pstmt = con.prepareStatement(SQL_SELECT_BY_ID);
+            pstmt.setInt(1, genero.getId_genero());
+            System.out.println(pstmt.toString());
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                genero = new Generos(rs.getInt("id_genero"), rs.getString("tipo_genero"));
+            }
+            System.out.println("genero: " + genero);
+        } catch (SQLException e) {
+            System.out.println("\nSQLException\n");
+            e.printStackTrace(System.out);
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(pstmt);
+            Conexion.close(con);
+        }
+        return genero;
     }
 
     @Override
-    public boolean update(Generos genero) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int add(Generos genero) {
+        int rows = 0;
+        try {
+            con = Conexion.getConnection();
+            pstmt = con.prepareStatement(SQL_INSERT);
+            pstmt.setString(1, genero.getTipo_genero());
+            System.out.println(pstmt.toString());
+            rows = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Se produjo un error al intentar insertar el siguiente registro" + genero.toString());
+            e.printStackTrace(System.out);
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return rows;
     }
 
     @Override
-    public boolean delete(Generos genero) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int update(Generos genero) {
+        int rows = 0;
+        try {
+            con = Conexion.getConnection();
+            pstmt = con.prepareStatement(SQL_UPDATE);
+            pstmt.setString(1, genero.getTipo_genero());
+            System.out.println(pstmt.toString());
+            rows = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Se produjo un error al intentar actualizar el siguiente registro " + genero.toString());
+            e.printStackTrace(System.out);
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        } finally {
+            Conexion.close(pstmt);
+            Conexion.close(con);
+        }
+        return rows;
+    }
+
+    @Override
+    public int delete(Generos genero) {
+        int rows = 0;
+        try {
+            con = Conexion.getConnection();
+            pstmt = con.prepareStatement(SQL_DELETE);
+            pstmt.setInt(1, genero.getId_genero());
+            System.out.println(pstmt.toString());
+            rows = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Se produjo un error al intetar eliminar el registro : " + genero + "Cuyo ID es : " + genero.getTipo_genero());
+            e.printStackTrace(System.out);
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return rows;
     }
 
 }

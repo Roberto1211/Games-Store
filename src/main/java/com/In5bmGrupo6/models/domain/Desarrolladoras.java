@@ -10,9 +10,33 @@ package com.In5bmGrupo6.models.domain;
  *Código técnico: IN5BM
  *
  */
-public class Desarrolladoras {
+
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+@Entity
+@Table(name = "empresas_desarrolladoras")
+
+@NamedQueries ({
+    @NamedQuery(name = "Desarrolladora.findAll", query = "from Desarrolladoras"),
+    @NamedQuery(name = "Desarrolladora.find", query = "from Desarrolladoras where id = :id")
+})
+
+public class Desarrolladoras implements Serializable{
     
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column (name = "nombre_desarrolladora")
     private String nombreDesarrolladora;
     
     public Desarrolladoras() {

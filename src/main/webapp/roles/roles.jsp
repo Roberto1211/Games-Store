@@ -37,19 +37,39 @@
 
         <main>
 
-            <section id="accions" class="py-4 ">
-                <div class="container-fluid text-center ">
-                    <div class="row ">
-                        <div class="col ">
-                            <a href="#" class="btn btn-primary">Agregar rol</a>
+            <section id="accions" class="py-4 mb-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Agregar Rol</a>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Agregar Rol</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form class="was-validated" method="POST" action="${pageContext.request.contextPath}/ServletRol">
+                            <div class="modal-body">                         
+                                <div class="mb-3">
+                                    <label for="descripcion" class="col-form-label">Descripcion:</label>
+                                    <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                                </div>
+                                <input type="hidden" value="insertar" id="accion" name="accion">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <section class="p-5" id="roles">
                 <div class="card">
-                    <div class="card-header text-primary bg-dark">
+                    <div class="card-header text-white bg-primary">
                         <h4 class="text-center">Listado Roles</h4>
                     </div>
                 </div>
@@ -68,8 +88,16 @@
                                 <tr>
                                     <td>${rol.id_rol}</td>
                                     <td>${rol.descripcion_rol}</td>
-                                    <td><i class="fa fa-edit"></i></td>
-                                    <td><i class="fa-solid fa-trash"></i></td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ServletRol?accion=editar&id=${rol.id_rol}">
+                                            <i class="fa fa-edit"></i> Editar
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ServletRol?accion=eliminar&id=${rol.id_rol}">
+                                            <i class="far fa-trash-alt"></i> Eliminar
+                                        </a>
+                                    </td>                                
                                 </tr>
                             </c:forEach>
                         </tbody>

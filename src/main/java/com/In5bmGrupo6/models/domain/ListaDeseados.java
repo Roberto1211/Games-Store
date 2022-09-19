@@ -1,6 +1,6 @@
 package com.In5bmGrupo6.models.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -8,6 +8,7 @@ import java.util.Date;
  */
 
 public class ListaDeseados {
+    
     private int id_lista;
     private int juego_id;
     private Date fecha_agregado;

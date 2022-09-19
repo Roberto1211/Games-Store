@@ -51,7 +51,7 @@
                                         <img src="./assets/images/juego-3.png" class="d-block w-100" alt="...">
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5>Top 3</h5>
-                                            <p>juegos mas populares</p>
+                                            <p>Juegos mas populares</p>
                                         </div>
                                     </div>
                                 </div>

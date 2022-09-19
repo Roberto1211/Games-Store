@@ -17,11 +17,11 @@ public interface IUsuarioDAO {
     public List<Usuarios> getAll(); 
     
     //Insertar registro
-    public boolean add(Usuarios estudiante);
+    public int add(Usuarios estudiante);
     
     //Actualizar un registro
-    public boolean update(Usuarios estudiante);
+    public int update(Usuarios estudiante);
     
     //Eliminar registro
-    public boolean delete(Usuarios estudiante);
+    public int delete(Usuarios estudiante);
 }

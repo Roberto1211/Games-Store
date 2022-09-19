@@ -23,15 +23,15 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletPersona?accion=listar">Personas</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletDesarrolladora?accion=listar">Empresas Desarrolladoras</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Servletjuego?accion=listar">juegos</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletListaDeseados?accion=listar">lista de deseados</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletRol?accion=listar">roles</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletGenero?accion=listar">genero</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletCliente?accion=listar">clientes</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletDistribuidora?accion=listar">distribuidoras</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletEmpleado?accion=listar">empleados</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletUsuario?accion=listar">usuarios</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletDesarrolladora?accion=listar">Empresas desarrolladoras</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Servletjuego?accion=listar">Juegos</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletListaDeseados?accion=listar">Lista de deseados</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletRol?accion=listar">Roles</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletGenero?accion=listar">Generos</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletCliente?accion=listar">Clientes</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletDistribuidora?accion=listar">Distribuidoras</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletEmpleado?accion=listar">Empleados</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ServletUsuario?accion=listar">Usuarios</a></li>
                     </ul>
                 </li>
             </ul>
@@ -46,12 +46,12 @@
             </ul>
             <form class="d-flex"></form>
             <a href="${pageContext.request.contextPath}/">
-                <button class="btn btn-outline-warning d-none d-md-inline-block mx-3" type="sumit">
+                <button class="btn btn-outline-primary d-none d-md-inline-block mx-3" type="sumit">
                     Sing up
                 </button>
             </a>
             <a href="${pageContext.request.contextPath}/login/login.jsp">
-                <button class="btn btn-outline-warning d-none d-md-inline-block" type="sumit">
+                <button class="btn btn-outline-primary d-none d-md-inline-block" type="sumit">
                     Login
                 </button>
             </a>

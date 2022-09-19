@@ -16,10 +16,10 @@
     <body>
         <div class="center">
             <div class="btns">
-                <a class="a1" href="#">Crear Cuenta</a>
-                <a class="a2" href="#">Iniciar Sesion</a>			
+                <a class="a1" href="#">Iniciar Sesion</a>
+                <a class="a2" href="#">Crear Cuenta</a>			
             </div>
-            <div class="signup-form">
+            <div class="login-form">
                 <div class="header">Crear Cuenta</div>
                 <div class="signup_error"></div>
                 <form action="home.html" name="signupForm" method="post" onsubmit="return signupValid()">
@@ -30,7 +30,7 @@
                     <input type="submit" value="Signup">
                 </form>
             </div>
-            <div class="login-form">
+            <div class="signup-form">
                 <div class="header header1">Iniciar Sesion</div>
                 <form action="">
                     <input class="email" type="text" placeholder="email">	

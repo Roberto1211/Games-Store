@@ -1,22 +1,60 @@
 package com.In5bmGrupo6.models.domain;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author joser
  */
 
-public class Personas {
+@Entity
+@Table(name = "personas")
+@NamedQueries({
+    @NamedQuery(name = "Persona.findAll", query = "from Personas"),
+    @NamedQuery(name = "Persona.find", query = "from Personas where id_persona = :id")
+})
+
+public class Personas implements Serializable{
+    
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_persona;
+    
+    @Column (name = "nombre1")
     private String nombre1;
+    
+    @Column (name = "nombre2")
     private String nombre2;
+    
+    @Column (name = "nombre3")
     private String nombre3;
+    
+    @Column (name = "apellido1")
     private String apellido1;
+    
+    @Column (name = "apellido2")
     private String apellido2;
+    
+    @Column (name = "email")
     private String email;
+    
+    @Column (name = "fecha_nacimiento")
     private Date fecha_nacimiento;
+    
+    @Column (name = "telefono")
     private String telefono;
+    
+    @Column (name = "direccion")
     private String direccion;
 
     public Personas() {

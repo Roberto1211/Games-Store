@@ -17,11 +17,11 @@ public interface IJuegosDAO {
     public List<Juegos> getAll(); 
     
     //Insertar registro
-    public boolean add(Juegos juego);
+    public int add(Juegos juego);
     
     //Actualizar un registro
-    public boolean update(Juegos juego); 
+    public int update(Juegos juego); 
     
     //Eliminar registro
-    public boolean delete(Juegos juego);
+    public int delete(Juegos juego);
 }

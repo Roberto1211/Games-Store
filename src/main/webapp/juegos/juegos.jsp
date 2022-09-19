@@ -36,19 +36,65 @@
         </header>
         <main>
 
-            <section id="accions" class="py-4 ">
-                <div class="container-fluid text-center ">
-                    <div class="row ">
+            <section id="accions" class="py-4 mb-4">
+                <div class="container">
+                    <div class="row-12">
                         <div class="col ">
-                            <a href="#" class="btn btn-primary">Agregar Juego</a>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Agregar Juego</a>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Agregar Juegos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form class="was-validated" method="POST" action="${pageContext.request.contextPath}/Servletjuego">
+                            <div class="modal-body">                         
+                                <div class="mb-3">
+                                    <label for="nombre_juego" class="col-form-label">nombre del juego</label>
+                                    <input type="text" class="form-control" id="nombre_juego" name="nombre_juego" min="1" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fecha_lanzamiento" class="col-form-label">fecha lanzamiento</label>
+                                    <input type="date" class="form-control" id="fecha_lanzamiento" name="fecha_lanzamiento"  required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="precio" class="col-form-label">precio</label>
+                                    <input type="number" class="form-control" id="precio" name="precio"  required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="desarrolladora_id" class="col-form-label">desarrolladora id</label>
+                                    <input type="number" class="form-control" id="desarrolladora_id" name="desarrolladora_id"  required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="distribuidora_id" class="col-form-label">distribuidora id</label>
+                                    <input type="number" class="form-control" id="distribuidora_id" name="distribuidora_id"  required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="genero_id" class="col-form-label">genero id</label>
+                                    <input type="number" class="form-control" id="genero_id" name="genero_id"  required>
+                                </div>
+
+                                <input type="hidden" value="insertar" id="accion" name="accion">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <section class="p-5" id="juegos">
                 <div class="card">
-                    <div class="card-header text-primary bg-dark">
+                    <div class="card-header text-white bg-primary">
                         <h4 class="text-center">Listado juegos</h4>
                     </div>
                 </div>
@@ -57,8 +103,8 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>ID Juego</th>
-                                <th></th>
                                 <th>Nombre del Juego</th>
+                                <th></th>
                                 <th>Fecha de Lanzamiento</th>
                                 <th>Precio</th>
                                 <th>Desarrolladora</th>
@@ -72,15 +118,22 @@
                             <c:forEach items="${listaJuegos}" var="juego">
                                 <tr>
                                     <td>${juego.id_juego}</td>
-                                    <td><img src="../assets/images/${juego.nombre_juego}.png" height="80" width="100" class="d-block w-100" alt="..."></td>
                                     <td>${juego.nombre_juego}</td>
+                                    <td><img src="../assets/images/${juego.nombre_juego}.png" height="70" width="90" class="d-block w-100"></td>
                                     <td>${juego.fecha_lanzamiento}</td>
                                     <td>${juego.precio}</td>
                                     <td>${juego.desarrolladora_id}</td>
                                     <td>${juego.distribuidora_id}</td>
                                     <td>${juego.genero_id}</td>
-                                    <td><i class="fa fa-edit"></i></td>
-                                    <td><i class="fa-solid fa-trash"></i></td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/Servletjuego?accion=editar&id=${juego.id_juego}">
+                                            <i class="fa fa-edit"></i> Editar
+                                        </a>
+                                    </td>
+                                    <td><a class="btn btn-secondary" href="${pageContext.request.contextPath}/Servletjuego?accion=eliminar&id=${juego.id_juego}">
+                                            <i class="far fa-trash-alt"></i> Eliminar
+                                        </a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>

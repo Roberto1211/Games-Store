@@ -17,11 +17,11 @@ public interface IGeneroDAO {
     public List<Generos> getAll(); 
     
     //Insertar registro
-    public boolean add(Generos estudiante);
+    public int add(Generos estudiante);
     
     //Actualizar un registro
-    public boolean update(Generos estudiante);
+    public int update(Generos estudiante);
     
     //Eliminar registro
-    public boolean delete(Generos estudiante);
+    public int delete(Generos estudiante);
 }

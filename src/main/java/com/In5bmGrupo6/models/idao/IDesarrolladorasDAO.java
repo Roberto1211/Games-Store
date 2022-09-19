@@ -12,9 +12,9 @@ public interface IDesarrolladorasDAO {
     
     public List<Desarrolladoras> getAll();
     
-    public boolean add(Desarrolladoras desarrolladora);
+    public int add(Desarrolladoras desarrolladora);
     
-    public boolean update(Desarrolladoras desarrolladora);
+    public int update(Desarrolladoras desarrolladora);
     
-    public boolean delete(Desarrolladoras desarrolladora);
+    public int delete(Desarrolladoras desarrolladora);
 }

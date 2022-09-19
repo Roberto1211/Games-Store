@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  *
- * @author Roberto Saldaña
+ * @author sergio
  * @date 30-08-2022
  * @time 08:55:00 AM
  * Código Técnico; IN5BM
@@ -17,11 +17,11 @@ public interface IClientesDAO {
     public List<Clientes> getAll(); 
     
     //Insertar registro
-    public boolean add(Clientes estudiante);
+    public int add(Clientes cliente);
     
     //Actualizar un registro
-    public boolean update(Clientes estudiante); 
+    public int update(Clientes cliente); 
     
     //Eliminar registro
-    public boolean delete(Clientes estudiante);
+    public int delete(Clientes cliente);
 }

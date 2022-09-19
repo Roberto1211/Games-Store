@@ -11,9 +11,10 @@ public interface ISuscripcionDAO {
     
     public List<Suscripciones> getAll();
     
-    public boolean add(Suscripciones suscripcion);
+    public int add(Suscripciones suscripcion);
     
-    public boolean update(Suscripciones suscripcion);
+    public int update(Suscripciones suscripcion);
     
-    public boolean delete(Suscripciones suscripcion);
+    public int delete(Suscripciones suscripcion);
+    
 }

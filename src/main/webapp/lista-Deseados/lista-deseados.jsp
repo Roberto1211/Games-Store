@@ -41,15 +41,49 @@
                 <div class="container-fluid text-center ">
                     <div class="row ">
                         <div class="col ">
-                            <a href="#" class="btn btn-primary">Agregar registro</a>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Agregar deseados</a>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Agregar Deseados</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form class="was-validated" method="POST" action="${pageContext.request.contextPath}/ServletListaDeseados">
+                            <div class="modal-body">                         
+                                <div class="mb-3">
+                                    <label for="juego_id" class="col-form-label">Id del Juego</label>
+                                    <input type="number" class="form-control" id="juego_id" name="juego_id" min="1" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fecha_agregado" class="col-form-label">fecha lanzamiento</label>
+                                    <input type="date" class="form-control" id="fecha_agregado" name="fecha_agregado"  required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cliente_id" class="col-form-label">Id del Cliente</label>
+                                    <input type="number" class="form-control" id="cliente_id" name="cliente_id" min="1" required>
+                                </div>
+
+                                <input type="hidden" value="insertar" id="accion" name="accion">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <section class="p-5" id="deseados">
                 <div class="card">
-                    <div class="card-header text-primary bg-dark">
+                    <div class="card-header text-white bg-primary">
                         <h4 class="text-center">Lista de deseados</h4>
                     </div>
                 </div>
@@ -72,8 +106,16 @@
                                     <td>${deseados.juego_id}</td>
                                     <td>${deseados.fecha_agregado}</td>
                                     <td>${deseados.cliente_id}</td>
-                                    <td><i class="fa fa-edit"></i></td>
-                                    <td><i class="fa-solid fa-trash"></i></td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="#">
+                                            <i class="fa fa-edit"></i> Editar
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ServletListaDeseados?accion=eliminar&id=${deseados.id_lista}">
+                                            <i class="far fa-trash-alt"></i> Eliminar
+                                        </a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>

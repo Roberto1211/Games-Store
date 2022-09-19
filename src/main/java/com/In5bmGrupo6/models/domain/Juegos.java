@@ -1,6 +1,6 @@
 package com.In5bmGrupo6.models.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *

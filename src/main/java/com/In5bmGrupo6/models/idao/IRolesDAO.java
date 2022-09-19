@@ -12,11 +12,11 @@ public interface IRolesDAO {
     public List<Roles> getAll(); 
     
     //Insertar registro
-    public boolean add(Roles estudiante);
+    public int add(Roles estudiante);
     
     //Actualizar un registro
-    public boolean update(Roles estudiante);
+    public int update(Roles estudiante);
     
     //Eliminar registro
-    public boolean delete(Roles estudiante);
+    public int delete(Roles estudiante);
 }

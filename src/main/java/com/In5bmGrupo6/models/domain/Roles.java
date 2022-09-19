@@ -4,10 +4,35 @@ package com.In5bmGrupo6.models.domain;
  *
  * @author TulioJimènez
  */
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
-public class Roles {
+
+@Entity
+@Table(name = "roles")
+
+@NamedQueries({
+    @NamedQuery(name = "Roles.findAll", query = "from Roles"),
+    @NamedQuery(name = "Roles.find", query = "from Roles where id_rol = :id")
+})
+
+
+public class Roles implements Serializable {
+    
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int id_rol;
+    
+    @Column
     private String descripcion_rol;
 
 
@@ -45,4 +70,10 @@ public class Roles {
     public void setDescripcion_rol(String descripcion_rol) {
         this.descripcion_rol = descripcion_rol;
     }
+
+    @Override
+    public String toString() {
+        return "Roles{" + "id_rol=" + id_rol + ", descripcion_rol=" + descripcion_rol + '}';
+    }
+    
 }

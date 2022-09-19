@@ -24,6 +24,8 @@ import java.util.ArrayList;
 public class DesarrolladoraDaoImpl implements IDesarrolladorasDAO{
     
     private static final String SQL_SELECT = "select id, nombre_desarrolladora from empresas_desarrolladoras";
+    private static final String SQL_SELECT_BY_ID = "select id, nombre_desarrolladora from empresas_desarrolladoras where id = ?";
+    private static final String SQL_DELETE = "delete from empresas_desarrolladoras where id = ?";
     
     private Connection con = null;
     private PreparedStatement pstmt = null;
@@ -53,17 +55,50 @@ public class DesarrolladoraDaoImpl implements IDesarrolladorasDAO{
     }
     
     @Override
-    public boolean add(Desarrolladoras desarrolladora) {
+    public int add(Desarrolladoras desarrolladora) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public Desarrolladoras get(Desarrolladoras desarrolladora) {
+        try {
+            con = Conexion.getConnection();
+            pstmt = con.prepareStatement(SQL_SELECT_BY_ID);
+            pstmt.setInt(1, desarrolladora.getId());
+            rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                desarrolladora = new Desarrolladoras(rs.getInt("id"), rs.getString("nombre_desarrolladora"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(pstmt);
+            Conexion.close(con);
+        }
+        return desarrolladora;
+    }
+
+    @Override
+    public int update(Desarrolladoras desarrolladora) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean update(Desarrolladoras desarrolladora) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean delete(Desarrolladoras desarrolladora) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int delete(Desarrolladoras desarrolladora) {
+        int rows = 0;
+        try {
+            con = Conexion.getConnection();
+            pstmt = con.prepareStatement(SQL_DELETE);
+            pstmt.setInt(1, desarrolladora.getId());
+            System.out.println(pstmt.toString());
+            rows = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Se produjo un error al intetar eliminar el registro : " + desarrolladora + "Cuyo ID es : " + desarrolladora.getId());
+            e.printStackTrace(System.out);
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return rows;
     }
 }

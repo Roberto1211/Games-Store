@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  *
- * @author Roberto Saldaña
+ * @author sergio
  * @date 30-08-2022
  * @time 08:55:00 AM
  * Código Técnico; IN5BM
@@ -17,11 +17,11 @@ public interface IDistribuidorasDAO {
     public List<Distribuidoras> getAll(); 
     
     //Insertar registro
-    public boolean add(Distribuidoras estudiante);
+    public int add(Distribuidoras empleado);
     
     //Actualizar un registro
-    public boolean update(Distribuidoras estudiante);
+    public int update(Distribuidoras empleado);
     
     //Eliminar registro
-    public boolean delete(Distribuidoras estudiante);
+    public int delete(Distribuidoras empleado);
 }

@@ -36,19 +36,45 @@
         </header>
         <main>
 
-            <section id="accions" class="py-4 ">
-                <div class="container-fluid text-center ">
-                    <div class="row ">
-                        <div class="col ">
-                            <a href="#" class="btn btn-primary">Agregar empleado</a>
+            <section id="accions" class="py-4 mb-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Agregar Empleados</a>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Agregar Empleados</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form class="was-validated" method="POST" action="${pageContext.request.contextPath}/ServletEmpleado">
+                            <div class="modal-body">                         
+                                <div class="mb-3">
+                                    <label for="empleado" class="col-form-label">Empleado</label>
+                                    <input type="number" class="form-control" id="empleado" name="empleado" min="1" required>
+                                </div>
+
+                                <input type="hidden" value="insertar" id="accion" name="accion">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <section class="p-5" id="empleados">
                 <div class="card">
-                    <div class="card-header text-primary bg-dark">
+                    <div class="card-header text-white bg-primary">
                         <h4 class="text-center">Listado Empleados</h4>
                     </div>
                 </div>
@@ -56,8 +82,8 @@
                     <table class="table table-striped">
                         <thead class="table-dark">
                             <tr>
+                                <th>ID</th>
                                 <th>Empleados</th>
-                                <th>Tipo Empleo</th>
                                 <th>Editar registros</th>
                                 <th>Eliminar</th>
                             </tr>
@@ -66,9 +92,17 @@
                             <c:forEach items="${listaEmpleados}" var="empleado">
                                 <tr>
                                     <td>${empleado.id_empleado}</td>
-                                    <td>${empleado.persona_id}</td>
-                                    <td><i class="fa fa-edit"></i></td>
-                                    <td><i class="fa-solid fa-trash"></i></td>
+                                    <td>${empleado.nombreCompleto}</td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ServletEmpleado?accion=editar&id=${empleado.id_empleado}">
+                                            <i class="fa fa-edit"></i> Editar
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ServletEmpleado?accion=eliminar&id=${empleado.id_empleado}">
+                                            <i class="far fa-trash-alt"></i> Eliminar
+                                        </a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>

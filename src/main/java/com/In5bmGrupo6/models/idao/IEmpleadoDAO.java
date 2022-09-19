@@ -17,11 +17,11 @@ public interface IEmpleadoDAO {
     public List<Empleados> getAll(); 
     
     //Insertar registro
-    public boolean add(Empleados estudiante);
+    public int add(Empleados estudiante);
     
     //Actualizar un registro
-    public boolean update(Empleados estudiante);
+    public int update(Empleados estudiante);
     
     //Eliminar registro
-    public boolean delete(Empleados estudiante);
+    public int delete(Empleados estudiante);
 }

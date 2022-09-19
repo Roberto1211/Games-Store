@@ -18,7 +18,11 @@ import java.sql.SQLException;
  */
 public class EmpleadosDaoImpl implements IEmpleadoDAO {
 
-    private static final String SQL_SELECT = "select id_empleado, persona_id from empleados";
+    private static final String SQL_SELECT = "select empleados.id_empleado, concat(personas.nombre1, \" \",personas.nombre2, \" \",personas.nombre3, \" \",personas.apellido1, \" \",personas.apellido2), personas.id_persona from empleados inner join personas on empleados.persona_id=personas.id_persona";
+    private static final String SQL_SELECT_BY_ID = "Select id_empleado, persona_id from empleados where id_empleado = ?";
+    private static final String SQL_DELETE = "Delete from empleados where id_empleado = ?";
+    private static final String SQL_INSERT = "insert into empleados(persona_id) values(?);";
+    private static final String SQL_UPDATE = "update empleados set persona_id=? where id_empleado = ?";
     private Connection con = null;
     private PreparedStatement pstmt = null;
     private ResultSet rs = null;
@@ -33,7 +37,7 @@ public class EmpleadosDaoImpl implements IEmpleadoDAO {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                empleado = new Empleados(rs.getInt(1),rs.getInt(2));
+                empleado = new Empleados(rs.getInt(1), rs.getString(2), rs.getInt(3));
                 listaEmpleados.add(empleado);
             }
         } catch (SQLException e) {
@@ -47,20 +51,88 @@ public class EmpleadosDaoImpl implements IEmpleadoDAO {
         }
         return listaEmpleados;
     }
-
-    @Override
-    public boolean add(Empleados empleado) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    
+    public Empleados get(Empleados empleado) {
+        try {
+            con = Conexion.getConnection();
+            pstmt = con.prepareStatement(SQL_SELECT_BY_ID);
+            pstmt.setInt(1, empleado.getId_empleado());
+            System.out.println(pstmt.toString());
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                empleado = new Empleados(rs.getInt("id_empleado"), rs.getInt("persona_id"));
+            }
+            System.out.println("empleado: " + empleado);
+        } catch (SQLException e) {
+            System.out.println("\nSQLException\n");
+            e.printStackTrace(System.out);
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(pstmt);
+            Conexion.close(con);
+        }
+        return empleado;
     }
 
     @Override
-    public boolean update(Empleados empleado) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int add(Empleados empleado) {
+        int rows = 0;
+        try {
+            con = Conexion.getConnection();
+            pstmt = con.prepareStatement(SQL_INSERT);
+            pstmt.setInt(1, empleado.getId_empleado());
+            System.out.println(pstmt.toString());
+            rows = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Se´produjo un error al intentar insertar el siguiente registro" + empleado.toString());
+            e.printStackTrace(System.out);
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return rows;
     }
 
     @Override
-    public boolean delete(Empleados empleado) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int update(Empleados empleado) {
+        int rows = 0;
+        try {
+            con = Conexion.getConnection();
+            pstmt = con.prepareStatement(SQL_UPDATE);
+            pstmt.setString(1, empleado.getNombreCompleto());
+            pstmt.setInt(2, empleado.getId_empleado());
+            System.out.println(pstmt.toString());
+            rows = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Se produjo un error al intentar actualizar el siguiente registro " + empleado.toString());
+            e.printStackTrace(System.out);
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        } finally {
+            Conexion.close(pstmt);
+            Conexion.close(con);
+        }
+        return rows;
+    }
+
+    @Override
+    public int delete(Empleados empleado) {
+        int rows = 0;
+        try {
+            con = Conexion.getConnection();
+            pstmt = con.prepareStatement(SQL_DELETE);
+            pstmt.setInt(1, empleado.getId_empleado());
+            System.out.println(pstmt.toString());
+            rows = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Se produjo un error al intentar eliminar el registro con el id: " + empleado.getId_empleado());
+            e.printStackTrace(System.out);
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+
+        return rows;
     }
 
 }

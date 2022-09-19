@@ -1,7 +1,7 @@
 <%-- 
-    Document   : distribuidoras
-    Created on : 1 sep 2022, 18:52:23
-    Author     : joser
+    Document   : clientes
+    Created on : 1 sep 2022, 18:50:22
+    Author     : sergio
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Game store</title>
+        <title>Game store distribuidores</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="../assets/css/estilo-pantalla-inicio.css">
@@ -21,6 +21,7 @@
     <body>
         <header>
             <jsp:include page="../WEB-INF/paginas/comunes/encabezado.jsp"/>
+
             <div class="img-background text-light fs-1">
                 <div class="container-fluid">
                     <div class="row">
@@ -40,18 +41,45 @@
                 <div class="container-fluid text-center ">
                     <div class="row ">
                         <div class="col ">
-                            <a href="#" class="btn btn-primary">Agregar distribuidora</a>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Agregar Distribuidores</a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="p-5" id="distribuidoras">
+            <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Agregar Distribuidoras</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form class="was-validated" method="POST" action="${pageContext.request.contextPath}/ServletDistribuidora">
+                            <div class="modal-body">                         
+                                <div class="mb-3">
+                                    <label for="nombre_distribuidora" class="col-form-label">nombre Distribuidora:</label>
+                                    <input type="text" class="form-control" id="nombre1" name="nombre_distribuidora" required>
+                                </div>
+
+                                <input type="hidden" value="insertar" id="accion" name="accion">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <section class="p-5" id="personas">
                 <div class="card">
-                    <div class="card-header text-primary bg-dark">
+                    <div class="card-header text-white bg-primary">
                         <h4 class="text-center">Listado Distribuidores</h4>
                     </div>
                 </div>
+
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead class="table-dark">
@@ -67,8 +95,16 @@
                                 <tr>
                                     <td>${distribuidora.id}</td>
                                     <td>${distribuidora.nombre_distribuidora}</td>
-                                    <td><i class="fa fa-edit"></i></td>
-                                    <td><i class="fa-solid fa-trash"></i></td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ServletDistribuidora?accion=editar&id=${distribuidora.id}">
+                                            <i class="fa fa-edit"></i> Editar
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ServletDistribuidora?accion=eliminar&id=${distribuidora.id}">
+                                            <i class="far fa-trash-alt"></i> Eliminar
+                                        </a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>

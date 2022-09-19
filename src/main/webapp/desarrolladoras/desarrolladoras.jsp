@@ -37,17 +37,48 @@
                     </div>
                 </div>
             </div>
+
         </header>
+
         <main>
             <section id="accions" class="py-4 ">
                 <div class="container-fluid text-center ">
                     <div class="row ">
                         <div class="col ">
-                            <a href="#" class="btn btn-primary">Agregar desarrolladora</a>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Agregar desarrolladora</a>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Agregar desarrolladora</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <form method="POST" action="${pageContext.request.contextPath}/ServletDesarrolladora" class="was-validated"> 
+                            <div class="modal-body">
+
+                                <div class="mb-3">
+                                    <label for="nombreDesarrolladora" class="col-form-label">Nombre de la desarrolladora:</label>
+                                    <input type="text" class="form-control" id="nombreDesarrolladora" name="nombreDesarrolladora" required> 
+                                </div>
+
+                                <input type="hidden" value="insertar" id="accion" name="accion">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
 
             <section class="p-5" id="desarrolladoras">
                 <div class="card">
@@ -70,8 +101,16 @@
                                 <tr>
                                     <td>${desarrolladora.id}</td>
                                     <td>${desarrolladora.nombreDesarrolladora}</td>
-                                    <td><i class="fa fa-edit"></i></td>
-                                    <td><i class="far fa-trash-alt"></i></td>
+                                    <td>
+                                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/ServletDesarrolladora?accion=editar&id=${desarrolladora.id}">
+                                            <i class="fa fa-edit"></i> Editar
+                                        </a>    
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ServletDesarrolladora?accion=eliminar&id=${desarrolladora.id}">
+                                            <i class="far fa-trash-alt"></i> Eliminar
+                                        </a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
